@@ -1,0 +1,42 @@
+int main()
+{
+decl
+    int temp, x, a, pidone, pidtwo, semid, iter, data, permission, fd1,fd2;
+    string filename1,filename2;
+enddecl
+
+begin
+    temp=exposcall("Read",-1,filename1);
+    temp=exposcall("Read",-1,permission);
+    temp=exposcall("Create",filename1, permission);
+    temp=exposcall("Read",-1,filename2);
+    temp=exposcall("Read",-1,permission);
+    temp=exposcall("Create",filename2,permission);
+    pidone = exposcall("Fork");
+    if (pidone != 0 ) then
+    	    semid = exposcall("Semget");
+            fd1=exposcall("Open",filename1);
+            iter = 2;
+            while(iter <= 4096) do
+                temp = exposcall("SemLock", semid);
+                temp=exposcall("Write",fd1, iter);
+                temp = exposcall("SemUnLock", semid);
+                iter=iter+2;
+            endwhile;
+            temp = exposcall("Semrelease", semid);
+    else
+        semid = exposcall("Semget");
+        fd2=exposcall("Open",filename2);
+        iter = 1;
+        while(iter <= 4096) do
+                temp = exposcall("SemLock", semid);
+                temp=exposcall("Write",fd2, iter);
+                temp = exposcall("SemUnLock", semid);
+                iter=iter+2;
+        endwhile; 
+        temp = exposcall("Semrelease", semid);
+    endif;
+    
+    return 0;
+end
+}

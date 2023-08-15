@@ -1,0 +1,30 @@
+/home/kushal/myexpos/expl
+
+
+load --os $HOME/myexpos/spl/spl_progs/count_to_20.xsm
+
+
+./xsm
+
+
+
+./spl $HOME/myexpos/spl/spl_progs/oddnos.spl
+
+
+////////debugging
+
+./xsm --debug
+
+reg 
+
+c
+
+
+///stage 6 and 7
+load --library ../expl/library.lib
+load --init $HOME/myexpos/expl/expl_progs/assg7.xsm
+load --int=10 ../spl/spl_progs/haltprog.xsm
+load --exhandler ../spl/spl_progs/haltprog.xsm
+load --os $HOME/myexpos/spl/spl_progs/os_stage_7.xsm
+
+

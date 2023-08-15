@@ -1,0 +1,29 @@
+int main()
+{
+	decl 
+		int n,x,i,max,temp;
+	enddecl
+begin
+	n=2;
+	while(n<=100) do
+		x=0;
+		i=2;
+		max=n/2;
+		while(i<max) do
+			temp=n%i;
+			if(temp==0) then
+				x=1;
+				break;
+			endif;
+			i=i+1;
+		endwhile;
+		
+		if(x==0) then
+			x=exposcall("Write",-2,n);
+		endif;
+		n=n+1;
+	endwhile;
+	return 0;
+end
+}
+		
